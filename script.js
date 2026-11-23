@@ -31,53 +31,57 @@ guessButton.addEventListener("click", function () {
 
     const value = guessInput.value.trim();
 
-    // Check empty or non-number
+    // Do nothing if empty or not a number
     if (value === "" || isNaN(value)) {
         return;
     }
 
     const guess = Number(value);
 
-    attempts++;
+    // Do nothing if not an integer
+    if (!Number.isInteger(guess)) {
+        return;
+    }
 
-    // Update attempt display
+    attempts++;
     attemptDisplay.textContent = attempts;
 
-    // Compare guess with target number
+    // Correct guess
     if (guess === targetNumber) {
 
         resultDisplay.textContent = "YOU WIN!";
         resultDisplay.style.color = "green";
 
         endGame();
+        return;
+    }
 
-    } else if (guess > targetNumber) {
-
+    // Compare guess with target
+    if (guess > targetNumber) {
         resultDisplay.textContent = guess + " is too high";
         resultDisplay.style.color = "red";
-
     } else {
-
         resultDisplay.textContent = guess + " is too low";
         resultDisplay.style.color = "blue";
     }
 
-    // Check if player used all attempts
-    if (attempts === maxAttempts && guess !== targetNumber) {
+    // All five attempts used
+    if (attempts >= maxAttempts) {
 
         resultDisplay.textContent = "YOU LOSE!";
         resultDisplay.style.color = "red";
 
-        endGame();
-
+        // Show 0 in the input field
         guessInput.value = "0";
 
-    } else if (guess !== targetNumber) {
+        endGame();
 
+    } else {
+
+        // Clear input for next attempt
         guessInput.value = "";
+        guessInput.focus();
     }
-
-    guessInput.focus();
 });
 
 // End the game
