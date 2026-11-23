@@ -1,0 +1,47 @@
+
+/* Main container */
+.main-container {
+    width: 550px;
+    margin: 30px auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* Heading */
+h2 {
+    margin-bottom: 10px;
+}
+
+/* Input field */
+#guess-value {
+    width: 250px;
+    padding: 8px;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+/* Buttons */
+button {
+    padding: 8px 15px;
+    font-size: 16px;
+    background-color: blue;
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: darkblue;
+}
+
+/* Restart button hidden initially */
+#restart-btn {
+    display: none;
+}
+
+/* Result */
+#result {
+    margin-top: 10px;
+    font-size: 16px;
+}
