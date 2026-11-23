@@ -21,8 +21,6 @@ function restartGame() {
     resultDisplay.textContent = "";
 
     guessButton.style.display = "inline-block";
-    guessButton.textContent = "Guess!";
-
     restartButton.style.display = "none";
 
     guessInput.focus();
@@ -33,17 +31,12 @@ guessButton.addEventListener("click", function () {
 
     const value = guessInput.value.trim();
 
-    // Do nothing if empty or not a number
+    // Check empty or non-number
     if (value === "" || isNaN(value)) {
         return;
     }
 
     const guess = Number(value);
-
-    // Do nothing if not an integer between 1 and 20
-    if (!Number.isInteger(guess) || guess < 1 || guess > 20) {
-        return;
-    }
 
     attempts++;
 
@@ -52,30 +45,38 @@ guessButton.addEventListener("click", function () {
 
     // Compare guess with target number
     if (guess === targetNumber) {
+
         resultDisplay.textContent = "YOU WIN!";
         resultDisplay.style.color = "green";
 
         endGame();
 
     } else if (guess > targetNumber) {
+
         resultDisplay.textContent = guess + " is too high";
         resultDisplay.style.color = "red";
 
     } else {
+
         resultDisplay.textContent = guess + " is too low";
         resultDisplay.style.color = "blue";
     }
 
-    // Check if all attempts are used
+    // Check if player used all attempts
     if (attempts === maxAttempts && guess !== targetNumber) {
-        resultDisplay.textContent = "YOU LOSE! The number was " + targetNumber;
+
+        resultDisplay.textContent = "YOU LOSE!";
         resultDisplay.style.color = "red";
 
         endGame();
+
+        guessInput.value = "0";
+
+    } else if (guess !== targetNumber) {
+
+        guessInput.value = "";
     }
 
-    // Clear input and focus again
-    guessInput.value = "";
     guessInput.focus();
 });
 
@@ -96,7 +97,3 @@ resultDisplay.textContent = "";
 
 guessButton.style.display = "none";
 restartButton.style.display = "inline-block";
-restartButton.textContent = "Restart";
-
-// Restart button starts the first game
-restartGame();
